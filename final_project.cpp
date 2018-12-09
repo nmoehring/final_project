@@ -21,6 +21,9 @@ const int ROOMS = 11;
 const int VERBS = 8;
 const int NOUNS = 6;
 
+//Task: Class public/private members (verb and direction need only members
+//									  inherited from words class)
+//Task: Change "struct words" to a class
 class words {
 public:
 	words(string, int);
@@ -33,6 +36,7 @@ private:
 	int code;
 };
 
+//Task: Change "struct room" to a class
 class room {
 public:
 	room(string, int, int, int, int);
@@ -45,7 +49,9 @@ private:
 	vector<int> exits_to_room;
 };
 
-//Use inheritance with your classes/objects
+//Task: Use inheritance with your classes/objects (noun, verb, direction
+//                                                 inherit from words class)
+//Task: Change "struct noun" to a class
 class noun : public words {
 public:
 	noun(string, int, string, int, bool);
@@ -70,7 +76,7 @@ public:
 };
 
 //--------Constructors---------------------------------------------------------
-//Create constructors and destructors for each class
+//Task: Create constructors and destructors for each class
 room::room(string desc,int N,int E,int S, int W) : description(desc) {
 	exits_to_room = {N,E,S,W};
 }
@@ -84,6 +90,7 @@ verb::verb(string wd, int cd) : words(wd, cd) {}
 
 direction::direction(string wd, int cd) : words(wd,cd) {}
 
+//Task: Use "setters/getters" for private data members
 //-------Setters---------------------------------------------------------------
 	void words::setWord(string wd) {word = wd;}
 	void words::setCode(int cd) {code = cd;}
@@ -102,6 +109,8 @@ direction::direction(string wd, int cd) : words(wd,cd) {}
 //---Setup Function Definitions------------------------------------------------
 
 void set_rooms(vector<room*> &rms) {
+	//Task: Use constructors to create the objects
+	//                room(description, N_exit, E_exit, S_exit, W_exit)
 	rms[SPORTSHOP] = new room("sports shop", NONE, NONE, CARPARK, NONE);
 	rms[CASINO] = new room("bustling casino", NONE, NONE, LOBBY, NONE);
 	rms[CARPARK] = new room("car park", SPORTSHOP, LOBBY, NONE, NONE);
@@ -295,19 +304,19 @@ int main() {
 	string word_1;
 	string word_2;
 
-	//Change rooms array into vectors
+	//Task: Change rooms array into vectors
 	vector<room*> rooms(ROOMS);
 	set_rooms(rooms);
 
-	//Change directions array into vectors
+	//Task: Change directions array into vectors
 	vector<direction*> directions(DIRS);
 	set_directions(directions);
 
-	//Change verbs array into vectors
+	//Task: Change verbs array into vectors
 	vector<verb*> verbs(VERBS);
 	set_verbs(verbs);
 
-	//Change nouns array into vectors
+	//Task: Change nouns array into vectors
 	vector<noun*> nouns(NOUNS);
 	set_nouns(nouns);
 
