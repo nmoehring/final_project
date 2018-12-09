@@ -16,8 +16,6 @@ enum en_VERBS {GET, DROP, USE, OPEN, CLOSE, EXAMINE, INVENTORY, LOOK};
 enum en_NOUNS {STORE_DOOR, MAGNET, METER, ROULETTE, MONEY, FISHROD};
 
 vector<string> str_DIRS = {"NORTH", "EAST", "SOUTH", "WEST"};
-vector<string> str_ROOMS = {"SPORTSHOP", "CASINO", "CARPARK", "LOBBY",
-	"RESTAURANT", "CORRIDOR", "STOREROOM", "POOL", "GARDEN", "POND", "PUMPROOM"};
 vector<string> str_VERBS = {"GET", "DROP", "USE", "OPEN", "CLOSE", "EXAMINE",
 	"INVENTORY", "LOOK"};
 vector<string> str_NOUNS = {"STORE_DOOR", "MAGNET", "METER", "ROULETTE",
@@ -53,6 +51,7 @@ public:
 	int getExit(int);
 	void setExit(int,int);
 private:
+	static int count;
 	string description;
 	vector<int> exits_to_room;
 };
@@ -72,41 +71,94 @@ private:
 	string description;
 	int location;
 	bool can_carry;
+	static int count;
 };
 
 class verb : public words {
 public:
 	verb(string, int);
 	verb(int);
+private:
+	static int count;
 };
 
 class direction : public words {
 public:
 	direction(string, int);
 	direction(int);
+private:
+	static int count;
 };
 
 //--------Constructors---------------------------------------------------------
 //Task: Create constructors and destructors for each class
+//Task: Use a static data member to limit number of objects
 room::room(string desc,int N,int E,int S, int W) : description(desc) {
 	exits_to_room = {N,E,S,W};
+	if {count == ROOMS} {
+		cout << "Error: too many rooms created!" << endl;
+		delete this;
+	} else {
+		count++;
+	}
 }
 
 words::words(string wd, int cd) : word(wd), code(cd) {}
 
 //Task: Create overloaded constructor functions
 noun::noun(string wd, int cd, string desc, int loc, bool carry) :
-description(desc), location(loc), can_carry(carry), words(wd, cd) {}
+description(desc), location(loc), can_carry(carry), words(wd, cd) {
+	if {count == NOUNS} {
+		cout << "Error: too many rooms created!" << endl;
+		delete this;
+	} else {
+		count++;
+	}
+}
 
 noun::noun(int cd, string desc, int loc, bool carry) :
-description(desc), location(loc), can_carry(carry), words(str_NOUNS[cd], cd)
-{}
+description(desc), location(loc), can_carry(carry), words(str_NOUNS[cd], cd) {
+	if {count == NOUNS} {
+		cout << "Error: too many rooms created!" << endl;
+		delete this;
+	} else {
+		count++;
+	}
+}
 
-verb::verb(string wd, int cd) : words(wd, cd) {}
-verb::verb(int cd) : words(str_VERBS[cd], cd) {}
+verb::verb(string wd, int cd) : words(wd, cd) {
+	if {count == VERBS} {
+		cout << "Error: too many verbs created!" << endl;
+		delete this;
+	} else {
+		count++;
+	}
+}
+verb::verb(int cd) : words(str_VERBS[cd], cd) {
+	if {count == VERBS} {
+		cout << "Error: too many verbs created!" << endl;
+		delete this;
+	} else {
+		count++;
+	}
+}
 
-direction::direction(string wd, int cd) : words(wd,cd) {}
-direction::direction(int cd) : words(str_DIRS[cd], cd) {}
+direction::direction(string wd, int cd) : words(wd,cd) {
+	if {count == DIRS} {
+		cout << "Error: too many directions created!" << endl;
+		delete this;
+	} else {
+		count++;
+	}
+}
+direction::direction(int cd) : words(str_DIRS[cd], cd) {
+	if {count == DIRS} {
+		cout << "Error: too many directions created!" << endl;
+		delete this;
+	} else {
+		count++;
+	}
+}
 
 //Task: Use "setters/getters" for private data members
 //-------Setters---------------------------------------------------------------
