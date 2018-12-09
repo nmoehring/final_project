@@ -117,9 +117,9 @@ void set_rooms(vector<room*> &rms) {
 
 void set_directions(vector<direction*> &dir) {
 	dir[NORTH] = new direction("NORTH", NORTH);
-	dir[EAST] = new direction("NORTH", EAST);
-	dir[SOUTH] = new direction("NORTH", SOUTH);
-	dir[WEST] = new direction("NORTH", WEST);
+	dir[EAST] = new direction("EAST", EAST);
+	dir[SOUTH] = new direction("SOUTH", SOUTH);
+	dir[WEST] = new direction("WEST", WEST);
 }
 
 void set_verbs(vector<verb*> &vbs) {
