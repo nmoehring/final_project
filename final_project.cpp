@@ -15,6 +15,14 @@ enum en_ROOMS {SPORTSHOP, CASINO, CARPARK, LOBBY, RESTAURANT, CORRIDOR,
 enum en_VERBS {GET, DROP, USE, OPEN, CLOSE, EXAMINE, INVENTORY, LOOK};
 enum en_NOUNS {STORE_DOOR, MAGNET, METER, ROULETTE, MONEY, FISHROD};
 
+vector<string> str_DIRS = {"NORTH", "EAST", "SOUTH", "WEST"};
+vector<string> str_ROOMS = {"SPORTSHOP", "CASINO", "CARPARK", "LOBBY",
+	"RESTAURANT", "CORRIDOR", "STOREROOM", "POOL", "GARDEN", "POND", "PUMPROOM"};
+vector<string> str_VERBS = {"GET", "DROP", "USE", "OPEN", "CLOSE", "EXAMINE",
+	"INVENTORY", "LOOK"};
+vector<string> str_NOUNS = {"STORE_DOOR", "MAGNET", "METER", "ROULETTE",
+	"MONEY", "FISHROD"};
+
 const int NONE = -1;
 const int DIRS = 4;
 const int ROOMS = 11;
@@ -55,6 +63,7 @@ private:
 class noun : public words {
 public:
 	noun(string, int, string, int, bool);
+	noun(int,string,int,bool);
 	void setDescription(string);
 	string getDescription();
 	int getLocation();
@@ -68,11 +77,13 @@ private:
 class verb : public words {
 public:
 	verb(string, int);
+	verb(int);
 };
 
 class direction : public words {
 public:
 	direction(string, int);
+	direction(int);
 };
 
 //--------Constructors---------------------------------------------------------
@@ -83,12 +94,19 @@ room::room(string desc,int N,int E,int S, int W) : description(desc) {
 
 words::words(string wd, int cd) : word(wd), code(cd) {}
 
+//Task: Create overloaded constructor functions
 noun::noun(string wd, int cd, string desc, int loc, bool carry) :
 description(desc), location(loc), can_carry(carry), words(wd, cd) {}
 
+noun::noun(int cd, string desc, int loc, bool carry) :
+description(desc), location(loc), can_carry(carry), words(str_NOUNS[cd], cd)
+{}
+
 verb::verb(string wd, int cd) : words(wd, cd) {}
+verb::verb(int cd) : words(str_VERBS[cd], cd) {}
 
 direction::direction(string wd, int cd) : words(wd,cd) {}
+direction::direction(int cd) : words(str_DIRS[cd], cd) {}
 
 //Task: Use "setters/getters" for private data members
 //-------Setters---------------------------------------------------------------
